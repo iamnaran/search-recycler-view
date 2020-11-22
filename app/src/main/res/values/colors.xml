@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryNight">#000000</color>
+
+    <color name="colorPrimaryDark">#FFFFFF</color>
+    <color name="colorPrimaryDarkNight">#000000</color>
+
+    <color name="colorAccent">#3B72FF</color>
+    <color name="colorAccentNight">#3B72FF</color>
+
+    <color name="colorPrimaryText">#373a46</color>
+    <color name="colorPrimaryTextNight">#ffffff</color>
+
+    <color name="colorSecondaryText">#8c8c8c</color>
+    <color name="colorSecondaryTextNight">#f2f2f2</color>
+
+    <color name="colorContainer">#EAEBEA</color>
+    <color name="colorContainerNight">#454D61</color>
+
+    <color name="colorContainerSecondary">#f2f2f2</color>
+    <color name="colorContainerSecondaryNight">#373F4D</color>
+
+    <color name="colorNavigationBottomBackground">#FFFFFF</color>
+    <color name="colorNavigationBottomBackgroundNight">#191813</color>
+
+    <color name="colorBookNowBackground">#F7FFFFFF</color>
+    <color name="colorBookNowBackgroundNight">#F7F2F4F2</color>
+
+    <color name="colorContainerBackground">#1F1B1B</color>
+    <color name="colorContainerBackgroundDim">#3A3737</color>
+
+    <color name="colorToolbarTransparentDay">#ABFFFFFF</color>
+    <color name="colorToolbarTransparentNight">#AB000000</color>
+
+
+
+
+</resources>

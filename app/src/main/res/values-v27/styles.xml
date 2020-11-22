@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base application theme. -->
+    <!-- Base Light theme. -->
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimaryText">@color/colorPrimaryText</item>
+        <item name="colorSecondaryText">@color/colorSecondaryText</item>
+        <item name="colorContainer">@color/colorContainer</item>
+        <item name="colorContainerSecondary">@color/colorContainerSecondary</item>
+        <item name="colorNavigationBottomBackground">@color/colorNavigationBottomBackground</item>
+        <item name="colorBookNowBackground">@color/colorBookNowBackground</item>
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="colorControlNormal">@color/colorAccent</item>
+        <item name="colorToolbarTransparent">@color/colorToolbarTransparentDay</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:navigationBarColor">@color/colorPrimary</item>
+
+    </style>
+
+
+    <style name="AppThemeDark" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimaryNight</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkNight</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimaryText">@color/colorPrimaryTextNight</item>
+        <item name="colorSecondaryText">@color/colorSecondaryTextNight</item>
+        <item name="colorContainer">@color/colorContainerNight</item>
+        <item name="colorContainerSecondary">@color/colorContainerSecondaryNight</item>
+        <item name="colorControlNormal">@color/colorAccent</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+        <item name="android:navigationBarColor">@color/colorNavigationBottomBackgroundNight</item>
+        <item name="colorNavigationBottomBackground">@color/colorNavigationBottomBackgroundNight</item>
+        <item name="colorBookNowBackground">@color/colorBookNowBackgroundNight</item>
+        <item name="android:windowBackground">@android:color/black</item>
+        <item name="colorToolbarTransparent">@color/colorToolbarTransparentNight</item>
+        <item name="android:navigationBarColor">@color/colorPrimaryDark</item>
+
+
+    </style>
+
+
+
+
+</resources>

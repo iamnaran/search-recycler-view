@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="spacing">16</dimen>
+    <dimen name="button_radius_large">4</dimen>
+
+    <dimen name="item_padding">10dp</dimen>
+    <dimen name="item_padding_bottom">10dp</dimen>
+
+    <dimen name="view_pager_gap">10</dimen>
+    <dimen name="item_offset">5</dimen>
+    <dimen name="bottom_navigation_text_size">10sp</dimen>
+
+
+
+    <dimen name="extra_large_text_size">24sp</dimen>
+    <dimen name="large_text_size">22sp</dimen>
+    <dimen name="extra_big_text_size">18sp</dimen>
+    <dimen name="big_text_size">14sp</dimen>
+    <dimen name="default_text_size">12sp</dimen>
+    <dimen name="small_text_size">12sp</dimen>
+    <dimen name="extra_small_text_size">10sp</dimen>
+    <dimen name="tiny_text_size">8sp</dimen>
+</resources>
