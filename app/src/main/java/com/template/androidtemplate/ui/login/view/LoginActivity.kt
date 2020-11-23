@@ -66,14 +66,19 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
                     val intent: Intent = Intent(this,MainActivity::class.java)
                     startActivity(intent)
+                    finish()
 
                 }
 
                 Status.ERROR ->{
 
+                    progressBar.visibility = View.INVISIBLE
+
                 }
 
                 Status.LOADING ->{
+
+                    progressBar.visibility = View.INVISIBLE
 
                 }
 

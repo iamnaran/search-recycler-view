@@ -105,8 +105,8 @@ class ApplicationModule {
 
     @Provides
     @Singleton
-    fun provideGson(): Gson {
-        return GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()
+    fun provideGson(): GsonBuilder {
+        return GsonBuilder().create().newBuilder()
     }
 
 

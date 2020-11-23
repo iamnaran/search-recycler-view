@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.gson.Gson
 import com.template.androidtemplate.data.helper.PreferencesHelper
 import com.template.androidtemplate.data.model.User
 import com.template.androidtemplate.data.repository.LoginRepository
@@ -50,23 +51,15 @@ class LoginViewModel @ViewModelInject constructor(
             viewModelScope.launch {
 
                 if (networkHelper.isNetworkConnected()) {
-
-                    if (preferencesHelper.getUserLoginDetails() != null){
-
-                        Log.e(TAG, "doLoginWork: preference Not null" )
-
-                    }else{
-                        Log.e(TAG, "doLoginWork: null" )
-
-                    }
-
                     loginRepository.postLogin(email!!, password!!).let {
                         if (it.isSuccessful){
                             onResponse.postValue(Resource.success(it.body()))
                             preferencesHelper.setCurrentUserLoggedInMode(AppConstants.LoggedInMode.LOGGED_IN_MODE_SERVER)
                             preferencesHelper.setUserLoginDetails(it.body())
+                            preferencesHelper.setAccessToken(it.body()!!.responseData.apiLoginToken)
                         }else{
                             onResponse.postValue(Resource.error(it.errorBody().toString(),null))
+                            progressBarVisibility.postValue(false)
                         }
                     }
                 }else{

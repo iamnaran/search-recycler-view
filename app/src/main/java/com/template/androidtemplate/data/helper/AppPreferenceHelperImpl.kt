@@ -3,6 +3,7 @@ package com.template.androidtemplate.data.helper
 import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.template.androidtemplate.data.model.User
 import com.template.androidtemplate.di.PreferenceInfo
 import com.template.androidtemplate.utils.AppConstants
@@ -12,14 +13,14 @@ import javax.inject.Inject
 class AppPreferenceHelperImpl @Inject constructor(
 
     context: Context,
-    gson: Gson,
+    gson: GsonBuilder,
     @PreferenceInfo private val preferenceName: String
 
 ) : PreferencesHelper {
 
     private var mPrefs: SharedPreferences? = null
+    private var gsonBuilder: GsonBuilder? = null
 
-    private var gsonBuilder: Gson? = null
     init {
         mPrefs = context.getSharedPreferences(
             preferenceName,
@@ -43,11 +44,14 @@ class AppPreferenceHelperImpl @Inject constructor(
     }
 
     override fun getUserLoginDetails(): User? {
-        return gsonBuilder!!.fromJson(mPrefs!!.getString(AppConstants.PREF_KEY_CURRENT_USER_DETAILS,null),User::class.java)
+
+        val userDetails: String? = mPrefs!!.getString(AppConstants.PREF_KEY_CURRENT_USER_DETAILS, null);
+
+        return gsonBuilder!!.create().fromJson(userDetails,User::class.java)
     }
 
     override fun setUserLoginDetails(user: User?) {
-        mPrefs!!.edit().putString(AppConstants.PREF_KEY_CURRENT_USER_DETAILS, gsonBuilder!!.toJson(user)).apply()
+        mPrefs!!.edit().putString(AppConstants.PREF_KEY_CURRENT_USER_DETAILS, gsonBuilder!!.create().toJson(user)).apply()
     }
 
     override fun getAccessToken(): String? {

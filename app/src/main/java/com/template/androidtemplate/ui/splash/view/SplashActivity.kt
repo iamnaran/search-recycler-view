@@ -26,7 +26,7 @@ class SplashActivity : AppCompatActivity(){
 
     private fun observeLoggedInMode() {
 
-        splashViewModel.isLoggedIn.observe(this, Observer {
+        splashViewModel.isUserLoggedIn().observe(this, Observer {
             if (it){
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
@@ -36,6 +36,7 @@ class SplashActivity : AppCompatActivity(){
             }
 
         })
+
     }
 
 }
