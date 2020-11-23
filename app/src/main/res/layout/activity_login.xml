@@ -65,7 +65,7 @@
                 android:layout_marginTop="20dp">
 
                 <EditText
-                    android:id="@+id/input_email"
+                    android:id="@+id/editTextEmailAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/normal"
@@ -91,7 +91,7 @@
                 android:layout_marginTop="15dp">
 
                 <EditText
-                    android:id="@+id/input_password"
+                    android:id="@+id/editTextPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/normal"

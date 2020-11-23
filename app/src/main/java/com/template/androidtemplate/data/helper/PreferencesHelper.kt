@@ -6,10 +6,10 @@ import com.template.androidtemplate.utils.AppConstants
 interface PreferencesHelper {
 
     fun setCurrentUserLoggedInMode(loggedInMode: AppConstants.LoggedInMode)
-    fun getCurrentUserLoggedInMode(): Int
+    fun getCurrentUserLoggedInMode(): Int?
 
     fun getUserLoginDetails(): User?
-    fun setUserLoginDetails(user: User)
+    fun setUserLoginDetails(user: User?)
 
     fun getAccessToken(): String?
     fun setAccessToken(accessToken: String?)

@@ -1,11 +1,11 @@
 package com.template.androidtemplate.di.module
 
-import android.app.Application
 import android.content.Context
+import android.content.SharedPreferences
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.template.androidtemplate.BuildConfig
-import com.template.androidtemplate.data.api.ApiHelper
-import com.template.androidtemplate.data.api.ApiHelperImpl
-import com.template.androidtemplate.data.api.ApiService
+import com.template.androidtemplate.data.api.*
 import com.template.androidtemplate.data.helper.AppPreferenceHelperImpl
 import com.template.androidtemplate.data.helper.PreferencesHelper
 import com.template.androidtemplate.di.PreferenceInfo
@@ -14,37 +14,60 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
 @InstallIn(ApplicationComponent::class)
 class ApplicationModule {
 
-
     @Provides
     @Singleton
-    fun provideContext(application: Application?): Context? {
-        return application
+    fun provideContext(@ApplicationContext appContext: Context): Context {
+        return appContext
     }
+
 
     @Provides
     fun providesBaseUrl() = BuildConfig.BASE_URL
 
     @Provides
     @Singleton
-    fun provideOkHttpClient() = if (BuildConfig.DEBUG) {
+    fun provideOkHttpClient(): OkHttpClient {
+
         val loggingInterceptor = HttpLoggingInterceptor()
+        val supportInterceptor = SupportInterceptor()
+//        val supportAuthenticator = SupportAuthenticator(providePreferencesHelper())
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
-        OkHttpClient.Builder()
-            .addInterceptor(loggingInterceptor)
-            .build()
-    } else OkHttpClient
-        .Builder()
-        .build()
+
+        if (BuildConfig.DEBUG) {
+            return OkHttpClient.Builder()
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS)
+                .followRedirects(true)
+                .followSslRedirects(true)
+                .addInterceptor(loggingInterceptor)
+                .addInterceptor(supportInterceptor)
+//                .authenticator(supportAuthenticator)
+                .build()
+        } else {
+            return OkHttpClient
+                .Builder()
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS)
+                .followRedirects(true)
+                .followSslRedirects(true)
+                .addInterceptor(loggingInterceptor)
+                .addInterceptor(supportInterceptor)
+//                .authenticator(supportAuthenticator)
+                .build()
+        }
+    }
 
     @Provides
     @Singleton
@@ -53,7 +76,7 @@ class ApplicationModule {
         BASE_URL: String
     ): Retrofit =
         Retrofit.Builder()
-            .addConverterFactory(MoshiConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
             .baseUrl(BASE_URL)
             .client(okHttpClient)
             .build()
@@ -72,8 +95,19 @@ class ApplicationModule {
     @PreferenceInfo
     fun providePreferenceName() = AppConstants.PREF_NAME
 
+
+
     @Provides
     @Singleton
-    fun providePreferencesHelper(preferencesHelper: AppPreferenceHelperImpl): PreferencesHelper = preferencesHelper
+    fun providePreferencesHelper(preferencesHelper: AppPreferenceHelperImpl): PreferencesHelper =
+        preferencesHelper
+
+
+    @Provides
+    @Singleton
+    fun provideGson(): Gson {
+        return GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()
+    }
+
 
 }

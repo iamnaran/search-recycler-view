@@ -16,7 +16,9 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-        buildConfigField 'String', 'BASE_URL', "\" https://api.thecommunitycloud.com/a/\""
+        buildConfigField 'String', 'BASE_URL', "\" https://api.thecommunitycloud.com/a/v3.0/\""
+        buildConfigField 'String', 'API_SECRET', "\"61y2UU1XME1GfVFa\""
+        buildConfigField 'String', 'API_KEY', "\"guWQWTof\""
 
         //https://api.thecommunitycloud.com/a/
 
@@ -63,7 +65,12 @@ dependencies {
 
 
     // Networking
-    implementation "com.squareup.retrofit2:converter-moshi:2.6.2"
+
+
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation "com.squareup.retrofit2:converter-gson:2.6.2"
+
+
     implementation "com.squareup.retrofit2:retrofit:2.8.1"
     implementation "com.squareup.okhttp3:okhttp:4.7.2"
     implementation "com.squareup.okhttp3:logging-interceptor:4.7.2"
