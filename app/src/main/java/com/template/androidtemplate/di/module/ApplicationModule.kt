@@ -1,11 +1,14 @@
 package com.template.androidtemplate.di.module
 
 import android.content.Context
-import android.content.SharedPreferences
+import androidx.annotation.NonNull
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.template.androidtemplate.BuildConfig
-import com.template.androidtemplate.data.api.*
+import com.template.androidtemplate.data.api.ApiHelper
+import com.template.androidtemplate.data.api.ApiHelperImpl
+import com.template.androidtemplate.data.api.ApiService
+import com.template.androidtemplate.data.api.SupportInterceptor
 import com.template.androidtemplate.data.helper.AppPreferenceHelperImpl
 import com.template.androidtemplate.data.helper.PreferencesHelper
 import com.template.androidtemplate.di.PreferenceInfo
@@ -105,9 +108,11 @@ class ApplicationModule {
 
     @Provides
     @Singleton
-    fun provideGson(): GsonBuilder {
-        return GsonBuilder().create().newBuilder()
+    @NonNull
+    fun provideGson(): Gson {
+        return Gson()
     }
+
 
 
 }

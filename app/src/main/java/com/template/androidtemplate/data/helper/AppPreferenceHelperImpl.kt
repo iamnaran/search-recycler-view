@@ -13,13 +13,13 @@ import javax.inject.Inject
 class AppPreferenceHelperImpl @Inject constructor(
 
     context: Context,
-    gson: GsonBuilder,
+    gson: Gson,
     @PreferenceInfo private val preferenceName: String
 
 ) : PreferencesHelper {
 
     private var mPrefs: SharedPreferences? = null
-    private var gsonBuilder: GsonBuilder? = null
+    private var gsonBuilder: Gson? = null
 
     init {
         mPrefs = context.getSharedPreferences(
@@ -47,11 +47,11 @@ class AppPreferenceHelperImpl @Inject constructor(
 
         val userDetails: String? = mPrefs!!.getString(AppConstants.PREF_KEY_CURRENT_USER_DETAILS, null);
 
-        return gsonBuilder!!.create().fromJson(userDetails,User::class.java)
+        return gsonBuilder!!.fromJson(userDetails,User::class.java)
     }
 
     override fun setUserLoginDetails(user: User?) {
-        mPrefs!!.edit().putString(AppConstants.PREF_KEY_CURRENT_USER_DETAILS, gsonBuilder!!.create().toJson(user)).apply()
+        mPrefs!!.edit().putString(AppConstants.PREF_KEY_CURRENT_USER_DETAILS, gsonBuilder!!.toJson(user)).apply()
     }
 
     override fun getAccessToken(): String? {
