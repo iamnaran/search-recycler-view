@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.template.androidtemplate.data.model.Home
 import com.template.androidtemplate.data.model.User
 import com.template.androidtemplate.di.PreferenceInfo
 import com.template.androidtemplate.utils.AppConstants
@@ -60,6 +61,19 @@ class AppPreferenceHelperImpl @Inject constructor(
 
     override fun setAccessToken(accessToken: String?) {
         mPrefs!!.edit().putString(AppConstants.PREF_KEY_ACCESS_TOKEN, accessToken).apply()
+
+    }
+
+    override fun getHomeFeeds(): Home? {
+
+        val home: String? = mPrefs!!.getString(AppConstants.PREF_KEY_HOME_FEEDS, null);
+
+        return gsonBuilder!!.fromJson(home,Home::class.java)
+
+    }
+
+    override fun setHomeFeeds(home: Home?) {
+        mPrefs!!.edit().putString(AppConstants.PREF_KEY_HOME_FEEDS, gsonBuilder!!.toJson(home)).apply()
 
     }
 

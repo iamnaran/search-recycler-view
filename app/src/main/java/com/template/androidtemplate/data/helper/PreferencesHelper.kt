@@ -1,5 +1,6 @@
 package com.template.androidtemplate.data.helper
 
+import com.template.androidtemplate.data.model.Home
 import com.template.androidtemplate.data.model.User
 import com.template.androidtemplate.utils.AppConstants
 
@@ -13,5 +14,8 @@ interface PreferencesHelper {
 
     fun getAccessToken(): String?
     fun setAccessToken(accessToken: String?)
+
+    fun getHomeFeeds(): Home?
+    fun setHomeFeeds(home: Home?)
 
 }

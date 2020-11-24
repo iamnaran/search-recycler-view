@@ -56,7 +56,7 @@ class LoginViewModel @ViewModelInject constructor(
                             onResponse.postValue(Resource.success(it.body()))
                             preferencesHelper.setCurrentUserLoggedInMode(AppConstants.LoggedInMode.LOGGED_IN_MODE_SERVER)
                             preferencesHelper.setUserLoginDetails(it.body())
-                            preferencesHelper.setAccessToken(it.body()!!.responseData.apiLoginToken)
+                            preferencesHelper.setAccessToken(it.body()!!.userDetails.token)
                         }else{
                             onResponse.postValue(Resource.error(it.errorBody().toString(),null))
                             progressBarVisibility.postValue(false)

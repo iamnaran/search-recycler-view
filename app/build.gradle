@@ -16,9 +16,9 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-        buildConfigField 'String', 'BASE_URL', "\" https://api.thecommunitycloud.com/a/v3.0/\""
-        buildConfigField 'String', 'API_SECRET', "\"61y2UU1XME1GfVFa\""
-        buildConfigField 'String', 'API_KEY', "\"guWQWTof\""
+        buildConfigField 'String', 'BASE_URL', "\"https://elibrary.smartgov.app/api/\""
+//        buildConfigField 'String', 'API_SECRET', "\"61y2UU1XME1GfVFa\""
+//        buildConfigField 'String', 'API_KEY', "\"guWQWTof\""
 
         //https://api.thecommunitycloud.com/a/
 

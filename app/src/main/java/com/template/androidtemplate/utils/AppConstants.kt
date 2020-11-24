@@ -10,6 +10,8 @@ class AppConstants {
         const val PREF_KEY_USER_LOGGED_IN_MODE = "PREF_KEY_USER_LOGGED_IN_MODE"
         const val PREF_KEY_CURRENT_USER_DETAILS = "PREF_KEY_CURRENT_USER_DETAILS"
         const val PREF_KEY_ACCESS_TOKEN = "PREF_KEY_ACCESS_TOKEN"
+        const val PREF_KEY_HOME_FEEDS = "PREF_KEY_HOME_FEEDS"
+
 
     }
 
