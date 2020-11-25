@@ -5,14 +5,12 @@ import androidx.annotation.NonNull
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.template.androidtemplate.BuildConfig
-import com.template.androidtemplate.data.api.ApiHelper
-import com.template.androidtemplate.data.api.ApiHelperImpl
-import com.template.androidtemplate.data.api.ApiService
-import com.template.androidtemplate.data.api.SupportInterceptor
+import com.template.androidtemplate.data.api.*
 import com.template.androidtemplate.data.helper.AppPreferenceHelperImpl
 import com.template.androidtemplate.data.helper.PreferencesHelper
 import com.template.androidtemplate.di.PreferenceInfo
 import com.template.androidtemplate.utils.AppConstants
+import com.template.androidtemplate.utils.NetworkHelper
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,11 +21,12 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 import javax.inject.Singleton
 
 @Module
 @InstallIn(ApplicationComponent::class)
-class ApplicationModule {
+class ApplicationModule() {
 
     @Provides
     @Singleton
@@ -39,13 +38,20 @@ class ApplicationModule {
     @Provides
     fun providesBaseUrl() = BuildConfig.BASE_URL
 
+
+    //    @Provides
+//    @Singleton
+//    fun provideSupportAuthenticator(): SupportAuthenticator {
+//        return SupportAuthenticator()
+//    }
+
     @Provides
     @Singleton
-    fun provideOkHttpClient(): OkHttpClient {
+    fun provideOkHttpClient(preferencesHelper: AppPreferenceHelperImpl): OkHttpClient {
 
         val loggingInterceptor = HttpLoggingInterceptor()
         val supportInterceptor = SupportInterceptor()
-//        val supportAuthenticator = SupportAuthenticator(providePreferencesHelper())
+        val supportAuthenticator = SupportAuthenticator(preferencesHelper)
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
 
         if (BuildConfig.DEBUG) {
@@ -56,7 +62,7 @@ class ApplicationModule {
                 .followSslRedirects(true)
                 .addInterceptor(loggingInterceptor)
                 .addInterceptor(supportInterceptor)
-//                .authenticator(supportAuthenticator)
+                .authenticator(supportAuthenticator)
                 .build()
         } else {
             return OkHttpClient
@@ -67,7 +73,7 @@ class ApplicationModule {
                 .followSslRedirects(true)
                 .addInterceptor(loggingInterceptor)
                 .addInterceptor(supportInterceptor)
-//                .authenticator(supportAuthenticator)
+                .authenticator(supportAuthenticator)
                 .build()
         }
     }
@@ -99,7 +105,6 @@ class ApplicationModule {
     fun providePreferenceName() = AppConstants.PREF_NAME
 
 
-
     @Provides
     @Singleton
     fun providePreferencesHelper(preferencesHelper: AppPreferenceHelperImpl): PreferencesHelper =
@@ -112,7 +117,6 @@ class ApplicationModule {
     fun provideGson(): Gson {
         return Gson()
     }
-
 
 
 }

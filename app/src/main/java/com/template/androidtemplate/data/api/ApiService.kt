@@ -13,7 +13,7 @@ interface ApiService {
     @POST(ApiEndPoints.LOGIN)
     @FormUrlEncoded
     suspend fun userLogin(
-        @Field("username") userEmail: String,
+        @Field("email") userEmail: String,
         @Field("password") userPassword: String
     ): Response<User>
 

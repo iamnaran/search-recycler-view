@@ -1,8 +1,9 @@
 package com.template.androidtemplate.ui.main.view
 
-import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import android.widget.ProgressBar
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
@@ -10,55 +11,45 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.gson.Gson
 import com.template.androidtemplate.R
+import com.template.androidtemplate.data.model.Home
+import com.template.androidtemplate.ui.main.adapter.CategoryAdapter
 import com.template.androidtemplate.ui.main.viewmodel.MainViewModel
 import com.template.androidtemplate.utils.Status
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_home.*
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
-
+class HomeActivity : AppCompatActivity() {
 
     private val mainViewModel: MainViewModel by viewModels()
-    private lateinit var progressBar: ProgressBar
-    private lateinit var recyclerViewCategory: RecyclerView
-    private lateinit var recyclerViewHome: RecyclerView
-    private lateinit var categoryAdapter: CategoryRecyclerViewAdapter
 
+    private lateinit var categoryAdapter: CategoryAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_home)
         setUpViews()
-        initializeViews()
         doObserveWork()
     }
 
+
     private fun setUpViews() {
 
-        progressBar = findViewById(R.id.progressBarHome)
-        recyclerViewCategory = findViewById(R.id.recyclerViewCategory)
-        recyclerViewHome = findViewById(R.id.recyclerViewHome)
-
-    }
-
-    private fun initializeViews() {
-
-        recyclerViewCategory.layoutManager = LinearLayoutManager(this)
-        categoryAdapter = CategoryRe(arrayListOf())
-        recyclerViewCategory.addItemDecoration(
-            DividerItemDecoration(
-                recyclerViewCategory.context,
-                (recyclerViewCategory.layoutManager as LinearLayoutManager).orientation
-            )
-        )
+        recyclerViewCategory.layoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
+        categoryAdapter = CategoryAdapter(arrayListOf())
         recyclerViewCategory.adapter = categoryAdapter
 
     }
 
-    @SuppressLint("SetTextI18n")
     private fun doObserveWork() {
+
+        progressBarHome.visibility = View.VISIBLE
+
+        mainViewModel.progressBarVisibility.observe(this, Observer {
+
+        })
 
         mainViewModel.getUserDetails().observe(this, Observer {
 
@@ -70,29 +61,43 @@ class MainActivity : AppCompatActivity() {
 
         mainViewModel.getHomeFeeds().observe(this, Observer {
 
-            when(it.status){
+            when (it.status) {
 
-                Status.SUCCESS ->{
+                Status.SUCCESS -> {
 
-                    progressBar.visibility = View.GONE
+                    progressBarHome.visibility = View.INVISIBLE
+
+                    val gson: Gson = Gson()
+                    Log.e( "doObserveWork: ",gson.toJson(it.data!!.categoriesList) )
+
+                    renderHomeList(it.data.categoriesList)
+
 
                 }
 
-                Status.ERROR ->{
+                Status.ERROR -> {
+                    progressBarHome.visibility = View.INVISIBLE
+
 
                 }
-                Status.LOADING ->{
+
+                Status.LOADING -> {
+
 
                 }
+
+
             }
 
         })
 
-    }
+        }
 
-    private fun renderCategories(){
-        categoryAdapter.addD
-    }
+    private fun renderHomeList(categoriesList: List<Home.Categories>) {
 
+        categoryAdapter.addData(categoriesList)
+        categoryAdapter.notifyDataSetChanged()
+
+    }
 
 }

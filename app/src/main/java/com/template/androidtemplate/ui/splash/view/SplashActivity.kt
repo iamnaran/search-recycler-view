@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.template.androidtemplate.ui.login.view.LoginActivity
 import com.template.androidtemplate.ui.login.viewmodel.LoginViewModel
-import com.template.androidtemplate.ui.main.view.MainActivity
+import com.template.androidtemplate.ui.main.view.HomeActivity
 import com.template.androidtemplate.ui.splash.viewmodel.SplashViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,7 +28,7 @@ class SplashActivity : AppCompatActivity(){
 
         splashViewModel.isUserLoggedIn().observe(this, Observer {
             if (it){
-                startActivity(Intent(this, MainActivity::class.java))
+                startActivity(Intent(this, HomeActivity::class.java))
                 finish()
             }else{
                 startActivity(Intent(this, LoginActivity::class.java))

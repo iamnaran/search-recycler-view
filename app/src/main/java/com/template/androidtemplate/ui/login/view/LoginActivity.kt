@@ -11,7 +11,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.template.androidtemplate.R
 import com.template.androidtemplate.ui.login.viewmodel.LoginViewModel
-import com.template.androidtemplate.ui.main.view.MainActivity
+import com.template.androidtemplate.ui.main.view.HomeActivity
 import com.template.androidtemplate.utils.Status
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_login.*
@@ -64,7 +64,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
                 Status.SUCCESS ->{
 
-                    val intent: Intent = Intent(this,MainActivity::class.java)
+                    val intent: Intent = Intent(this,HomeActivity::class.java)
                     startActivity(intent)
                     finish()
 
