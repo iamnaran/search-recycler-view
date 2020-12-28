@@ -14,7 +14,7 @@ It includes
 
 For Login use
 
-email :- nora@gmail.com
+email :- nora85@gmail.com
 password :- 123
 
 Download Project & Run
