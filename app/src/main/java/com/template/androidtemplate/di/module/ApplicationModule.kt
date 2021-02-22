@@ -14,8 +14,8 @@ import com.template.androidtemplate.utils.NetworkHelper
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -25,7 +25,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Module
-@InstallIn(ApplicationComponent::class)
+@InstallIn(SingletonComponent::class)
 class ApplicationModule() {
 
     @Provides
@@ -37,7 +37,6 @@ class ApplicationModule() {
 
     @Provides
     fun providesBaseUrl() = BuildConfig.BASE_URL
-
 
     //    @Provides
 //    @Singleton
@@ -78,6 +77,7 @@ class ApplicationModule() {
         }
     }
 
+
     @Provides
     @Singleton
     fun provideRetrofit(
@@ -93,6 +93,7 @@ class ApplicationModule() {
     @Provides
     @Singleton
     fun provideApiService(retrofit: Retrofit): ApiService = retrofit.create(ApiService::class.java)
+
 
 
     @Provides

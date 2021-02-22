@@ -1,6 +1,7 @@
 package com.template.androidtemplate.data.api
 
 import com.template.androidtemplate.data.model.Home
+import com.template.androidtemplate.data.model.Photos
 import com.template.androidtemplate.data.model.User
 import retrofit2.Response
 import retrofit2.http.Field
@@ -19,6 +20,10 @@ interface ApiService {
 
     @GET(ApiEndPoints.HOME)
     suspend fun homeFeeds(): Response<Home>
+
+
+    @GET(ApiEndPoints.PHOTOS_URL)
+    suspend fun getPhotosUrl(): Response<List<Photos>>
 
 
 }

@@ -9,9 +9,6 @@
     <dimen name="view_pager_gap">10</dimen>
     <dimen name="item_offset">5</dimen>
     <dimen name="bottom_navigation_text_size">10sp</dimen>
-
-
-
     <dimen name="extra_large_text_size">24sp</dimen>
     <dimen name="large_text_size">22sp</dimen>
     <dimen name="extra_big_text_size">18sp</dimen>
