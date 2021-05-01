@@ -11,6 +11,7 @@ import com.template.androidtemplate.R
 import com.template.androidtemplate.data.model.Photos
 import com.template.androidtemplate.ui.photos.adapter.PhotosAdapter
 import com.template.androidtemplate.ui.photos.viewmodel.PhotosViewModel
+import com.template.androidtemplate.utils.EmptyDataObserver
 import com.template.androidtemplate.utils.Status
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_photos.*
@@ -20,9 +21,7 @@ class PhotosActivity : AppCompatActivity() , SearchView.OnQueryTextListener{
 
 
     private val photosViewModel: PhotosViewModel by viewModels()
-
     private lateinit var photosAdapter: PhotosAdapter
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +39,8 @@ class PhotosActivity : AppCompatActivity() , SearchView.OnQueryTextListener{
             LinearLayoutManager.VERTICAL,false)
         photosAdapter = PhotosAdapter()
         recycler_view.adapter = photosAdapter
+        val emptyDataObserver = EmptyDataObserver(recycler_view, empty_data_parent)
+        photosAdapter.registerAdapterDataObserver(emptyDataObserver)
 
     }
 
