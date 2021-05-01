@@ -4,7 +4,7 @@ This a production based project helps you to understand Hilt Integration in Andr
 
 It includes
 
-1. Recyclerview
+1. Hilt Integration Recyclerview
 2. Retrofit Api Request to public base url 
 3. Searchview in recyclerview to filter data.
 4. Show empty dataset view when recyclerview is empty
